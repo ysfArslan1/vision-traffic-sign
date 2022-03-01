@@ -14,7 +14,6 @@ PORT_NUMBER = int(os.getenv('PORT_NUMBER', 5000))
 
 u_net = GtsrbInferrer()
 
-
 @app.route(APP_ROOT, methods=["POST"])
 def infer():
     data = request.json

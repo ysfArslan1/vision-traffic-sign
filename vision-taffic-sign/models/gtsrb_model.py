@@ -48,7 +48,7 @@ class GtsrbModel(ABC):
                 zeros = "0000"
             else:
                 zeros = "000"
-            path = "/home/arslan/Desktop/vision-kickstarter-tafikisareti/resources/Train/Images/" + zeros + str(i)
+            path = "resources/Train/Images/" + zeros + str(i)
             print(path)
             images = os.listdir(path)
             print(len(images))
@@ -70,13 +70,32 @@ class GtsrbModel(ABC):
 
     #@abstractmethod
     def build(self):
-        model = keras.models.load_model("weights/gtsrb/Trafic_signs_model.h5")
-        model.load_weights("weights/gtsrb/Trafic_signs_model_weights.h5")
+        #model = keras.models.load_model("weights/gtsrb/Trafic_signs_model.h5")
+        #model.load_weights("weights/gtsrb/Trafic_signs_model_weights.h5")
+        input_sh = (30, 30, 3)
+        model = Sequential()
+        model.add(Conv2D(filters=32, kernel_size=(5, 5), activation='relu', input_shape=input_sh))
+        model.add(Conv2D(filters=32, kernel_size=(5, 5), activation='relu'))
+        model.add(MaxPool2D(pool_size=(2, 2)))
+        model.add(Dropout(rate=0.25))
+        model.add(Conv2D(filters=64, kernel_size=(3, 3), activation='relu'))
+        model.add(Conv2D(filters=64, kernel_size=(3, 3), activation='relu'))
+        model.add(MaxPool2D(pool_size=(2, 2)))
+        model.add(Dropout(rate=0.25))
+        model.add(Flatten())
+        model.add(Dense(256, activation='relu'))
+        model.add(Dropout(rate=0.5))
+        model.add(Dense(43, activation='softmax'))
+
+        model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        model.summary()
         self.model = model
 
     #@abstractmethod
     def train(self):
         self.model.fit(self.X_train, self.y_train, batch_size=32, epochs=2, validation_data=(self.X_test, self.y_test))
+
+
 
     def save(self):
         self.model.save("weights/gtsrb/Trafic_signs_model.h5")

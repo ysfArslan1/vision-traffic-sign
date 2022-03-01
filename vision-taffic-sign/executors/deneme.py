@@ -17,11 +17,10 @@ def gtsrb_model_deneme():
     deneme.train()
     print("bitti")
 
-
 def gtsrb_inferrer_deneme():
     # inferrer deneme
     model = GtsrbInferrer()
-    image = np.asarray(Image.open('/home/arslan/Desktop/vision-kickstarter-tafikisareti/resources/test_sign/az_sayıda/00001.ppm')).astype(np.float32)
+    image = np.asarray(Image.open('//resources/test_sign/az_sayıda/00001.ppm')).astype(np.float32)
     image.resize((30, 30, 3))
     output = model.infer(image)
     print("reurn sonrası ", output['segmentation_output'])
@@ -40,5 +39,5 @@ def gtsrb_inferrer_deneme():
     print(key)
 
 
-#gtsrb_model_deneme()
-gtsrb_inferrer_deneme()
+gtsrb_model_deneme()
+#gtsrb_inferrer_deneme()

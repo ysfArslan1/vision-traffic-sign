@@ -1,4 +1,0 @@
--->kutuphaneler requariment bolumune yazıldı.
--->benim yazmam gereken yeni bir model, unet inferiri ve unet trainer , 
---> train ve test datasını indir
---> kodu drive da calıstır
