@@ -20,7 +20,7 @@ def gtsrb_model_deneme():
 def gtsrb_inferrer_deneme():
     # inferrer deneme
     model = GtsrbInferrer()
-    image = np.asarray(Image.open('//resources/test_sign/az_sayıda/00001.ppm')).astype(np.float32)
+    image = np.asarray(Image.open('resources/test_sign/az_sayıda/00001.ppm')).astype(np.float32)
     image.resize((30, 30, 3))
     output = model.infer(image)
     print("reurn sonrası ", output['segmentation_output'])

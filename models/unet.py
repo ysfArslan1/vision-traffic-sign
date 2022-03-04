@@ -15,7 +15,6 @@ from .base_model import BaseModel
 
 LOG = get_logger('unet')
 
-
 class UNet(BaseModel):
     """Unet Model Class"""
 

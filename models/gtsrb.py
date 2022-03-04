@@ -23,6 +23,8 @@ import numpy as np
 from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 
+path_main = "//"
+#path_main = ""
 
 class GtsrbModel(ABC):
 #class GtsrbModel():
@@ -35,7 +37,7 @@ class GtsrbModel(ABC):
         self.y_train = None
         self.X_test = None
         self.y_test = None
-    #@abstractmethod
+    @abstractmethod
     def load_data(self):
         data_train = []
         labels = []
@@ -48,7 +50,7 @@ class GtsrbModel(ABC):
                 zeros = "0000"
             else:
                 zeros = "000"
-            path = "resources/Train/Images/" + zeros + str(i)
+            path = path_main + "resources/Train/Images/" + zeros + str(i)
             print(path)
             images = os.listdir(path)
             print(len(images))
@@ -68,7 +70,7 @@ class GtsrbModel(ABC):
         self.y_train=y_train
         self.y_test=y_test
 
-    #@abstractmethod
+    @abstractmethod
     def build(self):
         #model = keras.models.load_model("weights/gtsrb/Trafic_signs_model.h5")
         #model.load_weights("weights/gtsrb/Trafic_signs_model_weights.h5")
@@ -91,15 +93,15 @@ class GtsrbModel(ABC):
         model.summary()
         self.model = model
 
-    #@abstractmethod
+    @abstractmethod
     def train(self):
         self.model.fit(self.X_train, self.y_train, batch_size=32, epochs=2, validation_data=(self.X_test, self.y_test))
 
 
 
     def save(self):
-        self.model.save("weights/gtsrb/Trafic_signs_model.h5")
-        self.model.save_weights("weights/gtsrb/Trafic_signs_model_weights.h5")
+        self.model.save(path_main+"weights/gtsrb/Trafic_signs_model.h5")
+        self.model.save_weights(path_main+"weights/gtsrb/Trafic_signs_model_weights.h5")
 
     #@abstractmethod
     def evaluate(self):
